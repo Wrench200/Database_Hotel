@@ -1,0 +1,58 @@
+
+
+1. Entities:
+   room_type: Represents different types of rooms available in the hotel. Attributes may include:
+     - `id`: Unique identifier for each room type.
+     - `room_name`: Name or label for the room type (e.g Standard Room,Suite).
+     - `room_description`: Description of the room type.
+     - `capacity`: Maximum occupancy (number of guests) for the room type.
+     - `price`: Price per night for the room type.
+
+   service: Describes various services offered by the hotel (e.g spa,gym). Attributes include:
+     - `id`: Unique identifier for each service.
+     - `name`: Name of the service.
+     - `desc`: Detailed description of the service.
+     - `price`: Cost of the service.
+
+   room: Represents individual hotel rooms. Attributes include:
+     - `id`: Unique identifier for each room.
+     - `room_number`: Room number or identifier 
+     - `room_type_id`: Foreign key referencing the room type associated with this room.
+     - `room_status`: Current status of the room (e.g available,occupied,reserved).
+
+   service_order: Records service orders placed by guests. Attributes may include:
+     - `id`: Unique identifier for each service order.
+     - `service_id`: Foreign key referencing the service associated with the order.
+     - `room_id`: Foreign key referencing the room where the service is requested.
+     - `order_date`: Date when the service order was placed.
+
+   reservation: Stores reservation information. Attributes include:
+     - `id`: Unique identifier for each reservation.
+     - `room_number`: Room number reserved.
+     - `room_type_id`: Foreign key referencing the room type reserved.
+     - `check_in_date`: Date when the guest is expected to check in.
+     - `check_out_date`: Date when the guest is expected to check out.
+     - `total_amount`: Total cost of the reservation.
+     - `status`: Reservation status (e.g confirmed, canceled, Pending).
+
+   payment: Contains payment details for reservations. Attributes include:
+     - `id`: Unique identifier for each payment.
+     - `payment_method`: Method used for payment (e.g card, cash).
+     - `payment_amount`: Amount paid.
+     - `status`: Payment status (e.g successful, pending).
+
+   guest: Represents information about hotel guests. Attributes include:
+     - `id`: Unique identifier for each guest.
+     - `first_name`: First name of the guest.
+     - `surname`: Last name or surname of the guest.
+     - `email`: Email address of the guest.
+     - `phone`: Contact phone number of the guest.
+
+2. Relationships:
+   - The following relationships exist between the entities:
+     - A room is associated with a specific room_type (via the `room_type_id` foreign key).
+     - A service_order is linked to a room (via the `room_id` foreign key) and a service (via the `service_id` foreign key).
+     - A reservation is connected to a room (via the `room_number` and `room_type_id` foreign keys) and a guest (via the `guest_id` foreign key).
+     - A payment is related to a reservation (via the `reservation_id` foreign key).
+     - Guest information is stored in the guest entity.
+
